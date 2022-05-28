@@ -1,8 +1,8 @@
 {
-  "name": "obj_snake",
+  "name": "obj_cherry",
   "spriteId": {
-    "name": "spr_snake_head",
-    "path": "sprites/spr_snake_head/spr_snake_head.yy",
+    "name": "spr_cherry",
+    "path": "sprites/spr_cherry/spr_cherry.yy",
   },
   "spriteMaskId": null,
   "visible": true,
@@ -23,7 +23,7 @@
   "physicsKinematic": false,
   "physicsShapePoints": [],
   "eventList": [
-    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":4,"collisionObjectId":{"name":"obj_snake","path":"objects/obj_snake/obj_snake.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
     {"isDnD":false,"eventNum":0,"eventType":3,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
   ],
   "properties": [],
