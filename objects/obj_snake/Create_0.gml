@@ -3,10 +3,12 @@
 
 speed = 1.5;
 direction = 0;
-body = ds_list_create();
+body = [];
+last_direction = direction;
 
 handle_direction = function ()
 {
+	last_direction = direction;
 	if (keyboard_check_pressed(vk_right)) direction = 0;
 	else if (keyboard_check_pressed(vk_up)) direction = 90;
 	else if (keyboard_check_pressed(vk_left)) direction = 180;
@@ -31,7 +33,18 @@ limit_inside_room = function ()
 	}
 }
 
+draw_body = function ()
+{
+	// to do
+}
+
 fruit_collected = function ()
 {
-	
+	add_body_part();
+}
+
+add_body_part = function ()
+{
+	var body_part = instance_create_layer(x, y, layer, obj_snake_body);
+	array_push(body, body_part);
 }
