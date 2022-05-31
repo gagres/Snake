@@ -1,19 +1,70 @@
 /// @description Insert description here
 // You can write your code in this editor
 
-speed = 1.5;
-direction = 0;
+velocity = sprite_width;
 body = [];
-last_direction = direction;
+move_to = Directions.right;
+last_direction = move_to;
+direction = move_to;
+image_angle = move_to;
+delay_move = 0;
+last_x = 0;
+last_y = 0;
 
-handle_direction = function ()
+move = function ()
 {
-	last_direction = direction;
-	if (keyboard_check_pressed(vk_right)) direction = 0;
-	else if (keyboard_check_pressed(vk_up)) direction = 90;
-	else if (keyboard_check_pressed(vk_left)) direction = 180;
-	else if (keyboard_check_pressed(vk_down)) direction = 270;
-	image_angle = direction;
+	last_x = x;
+	last_y = y;
+	if (delay_move > 0) return;
+	switch (move_to)
+	{
+		case Directions.right:
+			x += velocity;
+			break;
+		case Directions.left:
+			x -= velocity;
+			break;
+		case Directions.up:
+			y -= velocity;
+			break;
+		case Directions.down:
+			y += velocity;
+			break;
+	}
+	image_angle = move_to;
+	move_body();
+	set_delay_move();
+}
+
+set_delay_move = function ()
+{
+	delay_move = room_speed / 4;
+}
+
+move_body = function ()
+{
+	if (array_length(body) == 0) return;
+	body[0].move(last_x, last_y);
+}
+
+handle_change_direction = function ()
+{
+	last_direction = move_to;
+	var dir = last_direction;
+	if (keyboard_check_pressed(vk_right)) dir = Directions.right;
+	else if (keyboard_check_pressed(vk_up)) dir = Directions.up;
+	else if (keyboard_check_pressed(vk_left)) dir = Directions.left;
+	else if (keyboard_check_pressed(vk_down)) dir = Directions.down;
+	move_to = handle_inverse_direction(dir);
+}
+
+handle_inverse_direction = function (new_direction)
+{
+	var dir1 = min(last_direction, new_direction);
+	var dir2 = max(last_direction, new_direction);
+	if ((dir1 == Directions.right && dir2 == Directions.left) ||
+		(dir1 == Directions.up && dir2 == Directions.down)) return last_direction;
+	return new_direction;
 }
 
 limit_inside_room = function ()
@@ -33,11 +84,6 @@ limit_inside_room = function ()
 	}
 }
 
-draw_body = function ()
-{
-	// to do
-}
-
 fruit_collected = function ()
 {
 	add_body_part();
@@ -46,5 +92,11 @@ fruit_collected = function ()
 add_body_part = function ()
 {
 	var body_part = instance_create_layer(x, y, layer, obj_snake_body);
+	if (array_length(body) > 0) {
+		var previous_part = array_get(body, array_length(body) - 1);
+		if (instance_exists(previous_part)) previous_part.next_part = body_part;
+	}
 	array_push(body, body_part);
 }
+
+set_delay_move();
