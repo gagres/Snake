@@ -3,6 +3,7 @@
 
 move();
 handle_change_direction();
+hit_body();
 limit_inside_room();
 
 delay_move--;

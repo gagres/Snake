@@ -16,6 +16,7 @@ move = function ()
 	last_x = x;
 	last_y = y;
 	if (delay_move > 0) return;
+	last_direction = move_to;
 	switch (move_to)
 	{
 		case Directions.right:
@@ -49,8 +50,7 @@ move_body = function ()
 
 handle_change_direction = function ()
 {
-	last_direction = move_to;
-	var dir = last_direction;
+	var dir = move_to;
 	if (keyboard_check_pressed(vk_right)) dir = Directions.right;
 	else if (keyboard_check_pressed(vk_up)) dir = Directions.up;
 	else if (keyboard_check_pressed(vk_left)) dir = Directions.left;
@@ -65,6 +65,12 @@ handle_inverse_direction = function (new_direction)
 	if ((dir1 == Directions.right && dir2 == Directions.left) ||
 		(dir1 == Directions.up && dir2 == Directions.down)) return last_direction;
 	return new_direction;
+}
+
+hit_body = function()
+{
+	if (!position_meeting(x, y, obj_snake_body)) return;
+	velocity = 0;
 }
 
 limit_inside_room = function ()
@@ -91,7 +97,7 @@ fruit_collected = function ()
 
 add_body_part = function ()
 {
-	var body_part = instance_create_layer(x, y, layer, obj_snake_body);
+	var body_part = instance_create_layer(-50, -50, layer, obj_snake_body);
 	if (array_length(body) > 0) {
 		var previous_part = array_get(body, array_length(body) - 1);
 		if (instance_exists(previous_part)) previous_part.next_part = body_part;
