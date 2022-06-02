@@ -10,12 +10,21 @@ image_angle = move_to;
 delay_move = 0;
 last_x = 0;
 last_y = 0;
+stoped = false;
+
+act = function ()
+{
+	move();
+	handle_change_direction();
+	hit_body();
+	limit_inside_room();
+}
 
 move = function ()
 {
+	if (delay_move > 0) return;
 	last_x = x;
 	last_y = y;
-	if (delay_move > 0) return;
 	last_direction = move_to;
 	switch (move_to)
 	{
@@ -70,7 +79,7 @@ handle_inverse_direction = function (new_direction)
 hit_body = function()
 {
 	if (!position_meeting(x, y, obj_snake_body)) return;
-	velocity = 0;
+	obj_game_controller.end_game();
 }
 
 limit_inside_room = function ()
@@ -103,6 +112,11 @@ add_body_part = function ()
 		if (instance_exists(previous_part)) previous_part.next_part = body_part;
 	}
 	array_push(body, body_part);
+}
+
+stop_movement = function ()
+{
+	stoped = true;
 }
 
 set_delay_move();

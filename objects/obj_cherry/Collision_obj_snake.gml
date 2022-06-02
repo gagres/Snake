@@ -3,3 +3,4 @@
 
 instance_destroy();
 other.fruit_collected();
+obj_score_controller.add(points);
