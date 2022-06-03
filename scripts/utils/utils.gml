@@ -1,4 +1,4 @@
-// Script assets have changed for v2.3.0 see
+                       // Script assets have changed for v2.3.0 see
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 
 enum Directions
@@ -10,14 +10,19 @@ enum Directions
 }
 
 enum Rooms {
-	Start = 0,
-	Score = 1,
-	Game = 2,
+	Start = rm_start,
+	Score = rm_score,
+	Game = rm_game,
 }
 
 function start_game ()
 {
 	room_goto(Rooms.Game);
+}
+
+function go_to_start()
+{
+	room_goto(Rooms.Start);
 }
 
 function go_to_score ()
