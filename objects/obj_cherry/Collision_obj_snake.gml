@@ -3,4 +3,4 @@
 
 instance_destroy();
 other.fruit_collected();
-obj_score_controller.add(points);
+if (instance_exists(obj_ctrl_score)) obj_ctrl_score.add(points);

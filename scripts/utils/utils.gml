@@ -8,3 +8,19 @@ enum Directions
 	up = 90,
 	down = 270
 }
+
+enum Rooms {
+	Start = 0,
+	Score = 1,
+	Game = 2,
+}
+
+function start_game ()
+{
+	room_goto(Rooms.Game);
+}
+
+function go_to_score ()
+{
+	room_goto(Rooms.Score);
+}

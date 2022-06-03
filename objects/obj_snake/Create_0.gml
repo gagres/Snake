@@ -79,7 +79,7 @@ handle_inverse_direction = function (new_direction)
 hit_body = function()
 {
 	if (!position_meeting(x, y, obj_snake_body)) return;
-	obj_game_controller.end_game();
+	if (instance_exists(obj_ctrl_game)) obj_ctrl_game.end_game();
 }
 
 limit_inside_room = function ()
