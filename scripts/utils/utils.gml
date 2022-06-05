@@ -22,10 +22,10 @@ function start_game ()
 
 function go_to_start()
 {
-	room_goto(Rooms.Start);
+	TransitionStart(Rooms.Start, sq_fade_out, sq_fade_in);
 }
 
 function go_to_score ()
 {
-	room_goto(Rooms.Score);
+	TransitionStart(Rooms.Score, sq_fade_out, sq_fade_in);
 }
