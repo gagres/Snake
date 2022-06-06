@@ -26,6 +26,7 @@ get_best_score = function ()
 	ini_open(score_file);
 	best_score = ini_read_real(section, key, 0);
 	ini_close();
+	return best_score;
 }
 
 get_best_score();

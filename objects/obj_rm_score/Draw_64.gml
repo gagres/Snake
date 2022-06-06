@@ -10,8 +10,11 @@ draw_set_valign(fa_center);
 draw_set_halign(fa_middle);
 
 draw_set_font(f_score_title);
-var title = "Melhor Pontuação"
-draw_text(room_width / 2, 50, title);
+var title = "Melhor Pontuação";
+var title_color = c_white;
+title_width = lerp(title_width, room_width / 2, .08);
+title_alpha = lerp(title_alpha, 1, 0.05);
+draw_text_color(title_width, 50, title, title_color, title_color, title_color, title_color, title_alpha);
 
 draw_set_font(f_score);
 draw_text(room_width / 2, 100, best_score);

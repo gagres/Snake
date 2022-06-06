@@ -6,6 +6,7 @@ max_fruits = 1;
 end_game = function () {
 	if (instance_exists(obj_snake)) obj_snake.stop_movement();
 	if (instance_exists(obj_ctrl_score)) obj_ctrl_score.save();
+	TransitionStart(Rooms.Start, sq_fade_out, sq_fade_in);
 }
 
 create_collectable = function () {
